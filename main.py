@@ -28,6 +28,7 @@ class Serv(BaseHTTPRequestHandler):
            self.path = '/index.html'
         elif self.path == "/main":
            self.path = '/main.html'
+
         try:
            file_to_open = open(self.path[1:]).read()
            self.send_response(200)
@@ -40,3 +41,6 @@ class Serv(BaseHTTPRequestHandler):
 
 httpd = HTTPServer(('0.0.0.0',8080),Serv)
 httpd.serve_forever()
+
+
+# http://192.168.0.60:8080/data
