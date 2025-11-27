@@ -22,16 +22,16 @@
         
     </div>
     <script>
-        fetch("http://192.168.0.30:8080")
+        fetch("http://192.168.0.30:8080/data")
         .then(res => res.json())
         .then((data)=>{
             data.forEach(element => {
                 const card = document.createElement("div")
                 card.className = "card"
                 card.innerHTML = `
-                    <h1>${card.ad}</h1>
-                    <p>${card.pese}</p>
-                    <p>${card.maas}</p>
+                    <h1>${element.ad}</h1>
+                    <p>${element.pese}</p>
+                    <p>${element.maas}</p>
                 `
                 document.querySelector(".container").appendChild(card)
                 
