@@ -51,3 +51,4 @@ class Serv(BaseHTTPRequestHandler):
 httpd = HTTPServer(('0.0.0.0',8080),Serv)
 httpd.serve_forever()
 
+# http://192.168.0.60:8080/data
