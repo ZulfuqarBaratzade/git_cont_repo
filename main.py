@@ -1,4 +1,5 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
+import json
 data = [
   { "ad": "Aysel Həsənova", "pese": "Qrafik dizayner", "maas": 1200 },
   { "ad": "Murad Məmmədov", "pese": "Frontend proqramçı", "maas": 1800 },
@@ -22,12 +23,17 @@ data = [
   { "ad": "Fərid Şirinov", "pese": "Kibertəhlükəsizlik üzrə mütəxəssis", "maas": 2600 }
 ]
 
+
 class Serv(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
            self.path = '/index.html'
         elif self.path == "/main":
            self.path = '/main.html'
+        elif self.path =='/data':
+           self.converter(data)
+           self.send_header('Content-type','text/json')
+           self.path='/data.json'
         try:
            file_to_open = open(self.path[1:]).read()
            self.send_response(200)
@@ -36,7 +42,12 @@ class Serv(BaseHTTPRequestHandler):
            self.send_response(404)
         self.end_headers()
         self.wfile.write(bytes(file_to_open, 'utf-8'))
+    def converter(self):
+        a=json.dumps(data)
+        return a
+
     
 
 httpd = HTTPServer(('0.0.0.0',8080),Serv)
 httpd.serve_forever()
+
